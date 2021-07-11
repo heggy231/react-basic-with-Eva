@@ -180,6 +180,56 @@ ReactDOM.render(
       render Ski when winter.
       anyother seaon => nothing
 
-    - make Lake, SkiResort more dynamic by passing in `props` instead of hard coding Lake, skiResor info.
+    - make Lake, SkiResort more dynamic by passing in `props` instead of hard coding Lake, skiResort info.
 
     - conditional most used in `ternary if` statement
+    ```jsx
+    if summer => <Lake name="Jenny Lake" />
+    if winter => <SkiResort name="JHMR" />
+    // otherwise
+    <h1>
+      Come back in the winter or summer
+    </h1> 
+    ```
+
+```jsx
+function Lake({ name }) {
+  return (
+    <div>
+      <h1>🏊‍♀️🏖🏝 Visit {name}!</h1>
+    </div>
+  );
+}
+
+function SkiResort({ name }) {
+  return (
+    <div>
+      <h1>🏒⛸🧊 Visit {name}!</h1>
+    </div>
+  );
+}
+
+function App(props) {
+  return (
+    <div>
+      { props.season === "summer" ? (
+        <Lake name="Jenny Lake" /> 
+      ) : props.season === "summer" ? (
+        <SkiResort name="JHMR" /> 
+      ) : (
+        <h1>
+          Come back in the winter or summer
+        </h1> 
+      )}
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <App season="fall" />, 
+  document.getElementById("root")
+);
+```
+
+![if](./asset/if-summer-winter.png)
+![ternary](./asset/ternary-if-summ-wint.png)
