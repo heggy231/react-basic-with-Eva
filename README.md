@@ -233,3 +233,31 @@ ReactDOM.render(
 
 ![if](./asset/if-summer-winter.png)
 ![ternary](./asset/ternary-if-summ-wint.png)
+
+- [ternary code](https://gist.github.com/heggy231/5caba4b3909b4c41df7cafde58cc1141)
+
+
+- React.Fragment short hand => `<> </>` or `<React.Fragment></React.Fragment>`
+
+### Array destructuring: create variable for each i of array
+
+```js
+var food = [
+  'candy',
+  'veggie',
+  'rice'
+];
+
+food[0] // candy
+food[1] // veggie
+food[2] // rice
+
+// Each place i gets a variable
+// array destructuring creating variable for each index of array 
+const [ first, second, third ] = [ 'candy', 'veggie', 'rice' ];
+first // candy
+second // veggie
+third // rice
+
+```
+[code for array destructuring](https://gist.github.com/heggy231/2f671831f5469ea48e003617b4db6c45)
