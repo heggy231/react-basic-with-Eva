@@ -1,70 +1,177 @@
-# Getting Started with Create React App
+# intro react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## passing props
 
-## Available Scripts
+![props](./asset/props.png)
 
-In the project directory, you can run:
+```jsx
+function Hello(props) {
+  console.log(props); // {library: "Cutie", message: "Will you go out for a walk?"}
+  return (
+    <div>
+      <h1>Welcome to {props.library}!</h1>
+      <p>{props.message} {props.number}</p>
+    </div>
+  );
+}
 
-### `yarn start`
+ReactDOM.render(
+  <Hello 
+    library="Cutie" 
+    message="Will you go out for a walk?"
+    number={3}
+  />,
+  document.getElementById('root')
+);
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Component Lake that print out the props.name
 
-### `yarn test`
+```jsx
+function Lake(props) {
+  return (
+    <h1>{props.name}</h1>
+  )
+}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+// or after obj destructuring
+function Lake({name}) {
+  return (
+    <h1>{name}</h1>
+  )
+}
 
-### `yarn build`
+function App() {
+  return (<div>
+    <Lake name="Lake Tahoe" />
+    <Lake name="Angora Lake" />
+    <Lake name="Shirley Lake" />
+  </div>);
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+// =>
+// Lake Tahoe
+// Angora Lake
+// Shirley Lake
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Passing prop of lakeList array
 
-### `yarn eject`
+![lakes array](./asset/props-Lake-List-arr.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```jsx
+const lakeList = ["Echo Lake", "Maud Lake", "Cascade Lake"];
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+function App(props) {
+  console.log(props); // => { lakes: ["Echo Lake", "Maud Lake", "Cascade Lake"] }
+  return (
+    <ul>
+      {props.lakes}
+    </ul>
+  );
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+ReactDOM.render(
+  <App lakes={lakeList} />, 
+  document.getElementById("root")
+);
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```jsx
+// refactor and add in <li> with map loop thru 
 
-## Learn More
+const lakeList = ["Echo Lake", "Maud Lake", "Cascade Lake"];
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+function App({ lakes }) {
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  return (
+    <ul>
+      {lakes.map((lake, index) => <li key={index}>{lake}</li>)}
+    </ul>
+  );
+}
 
-### Code Splitting
+ReactDOM.render(
+  <App lakes={lakeList} />, 
+  document.getElementById("root")
+);
+```
+- Dynamically Loop thru object
+```html
+// => goal
+<div>
+  <div>
+    <h2>Echo</h2>
+    <p>Accessed by: Echo</p>
+  </div>
+  <div>...</div>
+</div>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```jsx
+// code
+const lakeList = [
+  {id: "1", name: "Echo", trailhead:"Echo"},
+  {id: "2", name: "Maud", trailhead:"Wright"},
+  {id: "3", name: "Velma", trailhead:"Wright"}
+];
 
-### Analyzing the Bundle Size
+function App({ lakes }) {
+  return (
+    <div>
+      {lakes.map(lake => (
+        <div key={lake.id}>
+          <h2>{lake.name}</h2>
+          <p>Accessed by: {lake.trailhead}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+ReactDOM.render(
+  <App lakes={lakeList} />, 
+  document.getElementById("root")
+);
+```
 
-### Making a Progressive Web App
+- Array of number use .toString() to convert the number to string to assign child element key value.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```js
+<li key={item.toString()}>{item}</li>
+```
 
-### Advanced Configuration
+```jsx
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+const list = [1, 2, 3, 4, 5];
 
-### Deployment
+function App({ lakes, items }) {
+  // console.log('props', props);
+  return (
+    <div>
+      {items.map(item => (
+        <li key={item.toString()}>{item}</li>
+      ))}
+      {lakes.map(lake => (
+        <div key={lake.id}>
+          <h2>Lake: {lake.name}</h2>
+          <p>Accessed by: {lake.trailhead}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+ReactDOM.render(
+  <App lakes={lakeList} items={list}/>, 
+  document.getElementById("root")
+);
+```
 
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Conditional Rendering
