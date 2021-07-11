@@ -178,3 +178,8 @@ ReactDOM.render(
 
     - Goal: render Lake when summer, 
       render Ski when winter.
+      anyother seaon => nothing
+
+    - make Lake, SkiResort more dynamic by passing in `props` instead of hard coding Lake, skiResor info.
+
+    - conditional most used in `ternary if` statement
