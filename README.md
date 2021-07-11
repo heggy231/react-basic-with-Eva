@@ -261,3 +261,46 @@ third // rice
 
 ```
 [code for array destructuring](https://gist.github.com/heggy231/2f671831f5469ea48e003617b4db6c45)
+
+### hooks
+
+## { useState }
+```js
+// initial state of status is "Open"
+// second value we get return from useState 
+//   is setStatus
+const [ status, setStatus ] = useState("Open");
+```
+
+- change status using useState
+
+![status update](./asset/status-update.png)
+
+```js
+function App() {
+  const [ status, setStatus ] = useState("Open");
+  return (
+    <div>
+      <h1>Status: {status}</h1>
+      <button onClick={() => setStatus("☀️ Open")}>
+        ☀️Open
+      </button>
+      <button onClick={() => setStatus("⏲ Back in 5")}>
+        ⏲Back in 5
+      </button>
+      <button onClick={() => setStatus("🏨🌴🌊 Vacation")}>
+        🏨🌴🌊Vacation
+      </button>
+      <button onClick={() => setStatus("🌙 Closed")}>
+        🌙Closed
+      </button>
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById("root")
+);
+
+```
