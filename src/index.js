@@ -2,28 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-function Lake() {
+function App() {
   return (
-    <h1>🏊‍♀️🏖🏝 Visit Lake!</h1>
-  );
-}
-
-function SkiResort() {
-  return (
-    <h1>🏒⛸🧊 Visit Ski Resort!</h1>
-  );
-}
-
-function App({ season }) {
-  return (
-    <>
-      <Lake />
-      <SkiResort />
-    </>
+    <div>
+      <h1>Status</h1>
+    </div>
   );
 }
 
 ReactDOM.render(
-  <><Lake /><SkiResort /></>, 
+  <App />, 
   document.getElementById("root")
 );
