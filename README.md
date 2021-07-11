@@ -174,4 +174,7 @@ ReactDOM.render(
 );
 ```
 
-- Conditional Rendering
+- Conditional Rendering:
+
+    - Goal: render Lake when summer, 
+      render Ski when winter.
