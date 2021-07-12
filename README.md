@@ -270,7 +270,7 @@ third // rice
 
 ```js
 // initial state of status is "Open"
-// second value we get return from useState 
+// second value of useState is a function that return from useState method.
 //   is setStatus
 const [ status, setStatus ] = useState("Open");
 ```
@@ -428,7 +428,7 @@ ReactDOM.render(
 ```
 
 - How to decouple rendering from the side-effect?
-    * `useEffect()` -- the hook that runs side-effects independently of rendering
+    * `useEffect()` -- the hook that runs side-effects independently of rendering.  It performs side effects inside your function components.
     * `useEffect()` accepts 2 arguments:
       `useEffect(callback[, dependencies]);`
         - `callback` is the cb fx containing side-effect logic.  `useEffect() executes the cb fx after React has committed the changes to the screen.
