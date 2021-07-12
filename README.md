@@ -530,3 +530,101 @@ function App() {
   );
 }
 ```
+
+- `useEffect()` api call `.fetch()` data:
+
+  * using [Github api](https://api.github.com/users/moonhighway)  We can see any user info in json api data.
+
+- First, check if I could get data by console it.
+
+```js
+fetch(url)
+  .then(response => response.json())
+  .then(data => console.log(`data`, data))
+  .catch(error => console.error(error));
+
+if(data) {
+// user exists then outputs data in JSON string format
+// JSON.stringify(data, null, '\t') prints out better format
+  return (
+    <div>{JSON.stringify(data, null, '\t')}</div>
+  );
+}
+```
+// => data { "login": "m", "id": 48685, "node_id": "MDQ6VXNlcjQ4Njg1", "avatar_url": "https://avatars.githubusercontent.com/u/48685?v=4", "gravatar_id": "", "url": "https://api.github.com/users/m", "html_url": "https://github.com/m", "followers_url": "https://api.github.com/users/m/followers", "following_url": "https://api.github.com/users/m/following{/other_user}", "gists_url": "https://api.github.com/users/m/gists{/gist_id}", "starred_url": "https://api.github.com/users/m/starred{/owner}{/repo}", "subscriptions_url":
+
+- Next, pass the data into setData function `setData` and return the data in better formatting
+
+```jsx
+function GitHubUser({ login }) {
+  // fetch data from github api https://api.github.com/users/m
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    // useEffect will fetch data
+    const url = `https://api.github.com/users/${login}`;
+    // prints result from `response.json()` in getRequest (https://gist.github.com/heggy231/3d54e3403edf78a3cb0b5436b851bfc8)
+    fetch(url)
+      .then(response => response.json())
+      .then(setData)
+      .catch(error => console.error(error));
+  }, []);
+
+  if(data) {
+  // user exists then outputs data in JSON string format
+  // JSON.stringify(data, null, '\t') prints out better format
+    return (
+      <div>
+        <h1>User Login: {data.login}</h1>
+        <img src={data.avatar_url} width={70} />
+        <h3>Number of Followers: {data.followers} 🌟</h3>
+      </div>
+    );
+  }
+
+  // if no user output null
+  return null
+}
+
+// pop github user fabpot andrew taylorotwell
+function App() {
+  return <GitHubUser login="andrew"/>
+}
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById("root")
+);
+
+```
+
+- Try github org
+
+- Try 30 users
+
+sample data: 
+
+```js
+const users = [
+{
+"login": "mojombo",
+"id": 1,
+"node_id": "MDQ6VXNlcjE=",
+"avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
+"gravatar_id": "",
+"url": "https://api.github.com/users/mojombo",
+"html_url": "https://github.com/mojombo",
+"followers_url": "https://api.github.com/users/mojombo/followers",
+"following_url": "https://api.github.com/users/mojombo/following{/other_user}",
+"gists_url": "https://api.github.com/users/mojombo/gists{/gist_id}",
+"starred_url": "https://api.github.com/users/mojombo/starred{/owner}{/repo}",
+"subscriptions_url": "https://api.github.com/users/mojombo/subscriptions",
+"organizations_url": "https://api.github.com/users/mojombo/orgs",
+"repos_url": "https://api.github.com/users/mojombo/repos",
+"events_url": "https://api.github.com/users/mojombo/events{/privacy}",
+"received_events_url": "https://api.github.com/users/mojombo/received_events",
+"type": "User",
+"site_admin": false
+},
+{},{},{},
+];
+```
