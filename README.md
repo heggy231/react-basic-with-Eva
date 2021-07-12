@@ -436,3 +436,97 @@ ReactDOM.render(
     * Warning: The component rendering and side-effect logic are independent. So it would be a mistake to perform side-effects directly in the body of the component.
 
     How often the component renders isn’t something you can control — if React wants to render the component, you cannot stop it.
+
+### Dependency Array with `useEffect()`
+
+- Set UI: `setVal()` will collect value of input 
+`setVal(e.target.value)`
+
+```jsx
+
+const [val, setVal] = useState('Kimchi');
+const [val2, setVal2] = useState('Shom');
+  return (
+    <>
+      <label>
+        Favorite Phrase:
+        <input value={val} onChange={e => setVal(e.target.value)}/>
+
+```
+
+```jsx
+function App() {
+  const [val, setVal] = useState('Kimchi');
+  const [val2, setVal2] = useState('Shom');
+
+  useEffect(() => {
+    console.log(`field 1: ${val}`);
+  });
+
+  useEffect(() => {
+    console.log(`field 2: ${val2}`);
+  });
+
+  return (
+    <>
+      <label>
+        Favorite Phrase:
+        <input value={val} onChange={e => setVal(e.target.value)}/>
+      </label>
+      <br />
+      <br />
+      <label>
+        Second Fav Phrase:
+        <input value={val2} onChange={e => setVal2(e.target.value)}/>
+      </label>
+    </>
+  );
+}
+```
+### intro to dependency Array (the second argument of `useEffect`)
+
+- `useEffect` will log out each values all together.  But we only want the value that is getting changed.
+
+  - Therefore, we want to use `dependency Array []` so that only the changes are logged to the console. (Either val or val2)
+
+  - Solution: I only want this useEffect field1 change to fire only when its value has been changed. (we communicate this by passing in second argmt to `useEffect(cb, [val])`).
+
+```jsx
+useEffect(() => {
+  console.log(`field 1: ${val}`);
+}, [val]);
+```
+
+![useEffect depArr](./asset/depArray.png)
+
+* Also we can make it show both by passing in both variable.
+
+```jsx
+function App() {
+  const [val, setVal] = useState('Kimchi');
+  const [val2, setVal2] = useState('Shom');
+
+  useEffect(() => {
+    console.log(`field 1: ${val}`);
+  }, [val, val2]);
+
+  useEffect(() => {
+    console.log(`field 2: ${val2}`);
+  }, [val2]);
+
+  return (
+    <>
+      <label>
+        Favorite Phrase:
+        <input value={val} onChange={e => setVal(e.target.value)}/>
+      </label>
+      <br />
+      <br />
+      <label>
+        Second Fav Phrase:
+        <input value={val2} onChange={e => setVal2(e.target.value)}/>
+      </label>
+    </>
+  );
+}
+```
