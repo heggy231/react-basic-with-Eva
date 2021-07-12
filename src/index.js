@@ -4,11 +4,17 @@ import "./index.css";
 
 function Greet({ name }) {
   const message = `Hello, ${name}!`; // calc Output
+   // BAD!  
+  //  alert(document.title); // => react app
+  //  document.title = 'KDrama'; // => side-effect!
+  //  alert(`after change title: ${document.title}`)  // => KDrama then the component finally shows "Hello, Heggy!"
 
-  // BAD!  perform side-effects directly in the body of the component. sets title inside of head html
-  alert(document.title); // => react app
-  document.title = 'KDrama';
-  alert(`after change title: ${document.title}`)  // => KDrama then the component finally shows "Hello, Heggy!"
+  useEffect(() => {
+    // GOOD!  
+    alert(document.title); // => react app
+    document.title = 'KDrama'; // => side-effect!
+    alert(`after change title: ${document.title}`)  // => KDrama then the component finally shows "Hello, Heggy!"
+  }, []);
 
   return (
     <div>
