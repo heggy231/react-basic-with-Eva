@@ -363,3 +363,41 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ```
+
+### Checkbox project:
+
+- Incorporate useState()
+
+- Set checked as state variable
+
+- state value initially set to false
+
+- JSX expression: check if box is checked (true) or not
+
+- input checkbox set `onChange` when state of checkbox is changed
+
+- Toggle if it is checked => make it not checked vice versa.
+
+- Function gets called regardless what is happening in the dom when just dealing with `useState(false)` for checked or not.  This is good spot to use `useEffect`.
+```jsx
+function Checkbox() {
+  const [checked, setCheckbox] = useState(false);
+  // alert gets called before component is rendered.
+  alert(`checked: ${checked.toString()}`);
+  return (
+    <>
+      <input 
+        type="checkbox"
+        value={checked} 
+        onChange={() => setCheckbox( checked => !checked )}
+      />
+      { checked ? "checked" : "not checked" }
+    </>
+  );
+}
+```
+
+- `useEffect` allows perform "side effects" inside of function components.
+
+    * side-effect (https://dmitripavlutin.com/react-useeffect-explanation/)
+      Ex) of side-effects: fetch request, manipulating DOM directly, using timer functions like setTimeout()
