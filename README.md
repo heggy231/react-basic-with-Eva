@@ -628,3 +628,51 @@ const users = [
 {},{},{},
 ];
 ```
+### fetch github user info 30
+```js
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+
+
+function GitHubUsers() {
+  // fetch data from github api https://api.github.com/users
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    // useEffect will fetch data
+    const url = `https://api.github.com/users`;
+    // prints result from `response.json()` in getRequest (https://gist.github.com/heggy231/3d54e3403edf78a3cb0b5436b851bfc8)
+    fetch(url)
+      .then(response => response.json())
+      .then(setData)
+      .catch(error => console.error(error));
+  }, []);
+
+  if(data) {
+  // user exists then outputs data in JSON string format
+  // JSON.stringify(data, null, '\t') prints out better format
+    return (
+      data.map((user, index) => 
+        <div key={index}>
+          <h1>User Login: {user.login}</h1>
+          <img src={user.avatar_url} width={70} alt={user.login}/>
+          <a href={user.html_url} target="_blank"><h3>{user.login}'s Github Homepge 🌟</h3></a>
+        </div>
+      )
+    );
+  }
+
+  // if no user output null
+  return null
+}
+
+// pop github users: fabpot andrew taylorotwell
+function App() {
+  return <GitHubUsers />
+}
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById("root")
+);
+```
