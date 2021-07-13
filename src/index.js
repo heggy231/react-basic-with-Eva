@@ -9,7 +9,6 @@ const Checkbox = () => {
   return (
     <>
       <input onChange={() => setChecked(checked => !checked)} type="checkbox" value={checked} />
-
       {checked ? "I want" : "No, I don't"}
     </>
   );
