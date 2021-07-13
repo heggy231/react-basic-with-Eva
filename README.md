@@ -800,6 +800,8 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ```
+![checkbox state mange](./asset/useState-hook.gif)
+
 
 - Understand Reducer: https://hswolff.com/blog/why-i-love-usereducer/
 - youTube: https://www.youtube.com/c/hswolff/videos
@@ -833,3 +835,84 @@ Google has found that “users complete forms up to 30% faster” when using aut
 Before moving forward, check if your form includes autocomplete attributes. This helps the Credential Management API find the id and password from the form and construct a credential object.
 
 This also helps browsers not supporting the Credential Management API to understand its semantics. Learn more about autofill in this article by Jason Grigsby.
+
+#### Starting point why I love reducer:
+
+* Form
+
+- Inside of App.js)
+  Passing `LoginPlain.js` into `App.js`
+![Reducer Login Form](./asset/whyIloveLoginForm.png)
+
+```js
+import logo from './logo.svg';
+import './App.css';
+import { LoginPlain } from './LoginPlain';
+
+function App() {
+  return (
+    <div className="App">
+      <LoginPlain />
+    </div>
+  );
+}
+
+export default App;
+```
+
+* inside of LoginPlain.js)
+
+```js
+import React from 'react'
+
+export const LoginPlain = () => {
+  const onSubmit = async e => {
+    e.preventDefault();
+
+    alert('todo');
+  };
+
+  return (
+    <div className="App">
+      <div className="login-container">
+        <form className="form" onSubmit={onSubmit}>
+          <p>Please Login!</p>
+          <input type="text" placeholder="username" />
+          <input 
+            type="password"
+            placeholder="password"
+            autoComplete="new-password"
+          />
+          <button className="submit" type="submit">
+            Log In
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
+```
+
+- How to update user input from input form?
+
+1.   
+```js
+const [username, setUsername] = useState('');
+const [password, setPassword] = useState('');
+```
+
+2. pass each varialbe inside of value attribute and set onChange event handling:
+
+```js
+<input type="text" placeholder="username" 
+  value={username}
+  onChange={e => setUsername(e.target.value)}
+/>
+<input 
+  type="password"
+  placeholder="password"
+  autoComplete="new-password"
+  value={password}
+  onChange={e => setPassword(e.target.value)}
+/>
+```
