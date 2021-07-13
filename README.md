@@ -752,3 +752,21 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ```
+
+** Refactor the onChange event handling to call the toggle function.
+
+```js
+  function toggle() {
+    setChecked(checked => !checked)
+  }
+  
+  return (
+    <>
+      <input 
+      type="checkbox" 
+      value={checked} 
+      onChange={toggle} />
+      {checked ? "I want" : "no I don't"}
+    </>
+  );
+```

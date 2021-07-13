@@ -5,12 +5,17 @@ import "./index.css";
 
 const Checkbox = () => {
   const [checked, setChecked] = useState(false);
+  
+  function toggle() {
+    setChecked(checked => !checked)
+  }
+  
   return (
     <>
       <input 
       type="checkbox" 
       value={checked} 
-      onChange={() => setChecked(checked => !checked)} />
+      onChange={toggle} />
       {checked ? "I want" : "no I don't"}
     </>
   );
