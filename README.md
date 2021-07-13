@@ -770,3 +770,66 @@ ReactDOM.render(
     </>
   );
 ```
+### use Reducer
+- step 1) get rid of useState
+then input useReducer to own the function that updates the state.
+
+```jsx
+
+const Checkbox = () => {
+  // useReducer(logic for second argment toggle function, inital state)
+  const [checked, toggle] = useReducer(checked => !checked, false);
+  
+  function toggle() {
+    setChecked()
+  }
+  
+  return (
+    <>
+      <input 
+      type="checkbox" 
+      value={checked} 
+      onChange={toggle} />
+      {checked ? "I want" : "no I don't"}
+    </>
+  );
+}
+
+ReactDOM.render(
+  <Checkbox />, 
+  document.getElementById("root")
+);
+```
+
+- Understand Reducer: https://hswolff.com/blog/why-i-love-usereducer/
+- youTube: https://www.youtube.com/c/hswolff/videos
+
+- what is `autoComplete="new-password"?
+
+  * this turn off form autocompletion.
+
+autocomplete attribute to provide hints to the browser about what content a field expects.
+
+How to turn off form autocompletion - 
+Preventing autofilling with autocomplete="new-password"
+
+If you are defining a user management page where a user can specify a new password for another person, and therefore you want to prevent autofilling of password fields, you can use autocomplete="new-password".
+
+This is a hint, which browsers are not required to comply with. However modern browsers have stopped autofilling <input> elements with autocomplete="new-password" for this very reason. 
+
+https://cloudfour.com/thinks/autofill-what-web-devs-should-know-but-dont/
+
+Google has found that “users complete forms up to 30% faster” when using autofill.
+
+```html
+<form id="signup" method="post">
+ <input name="email" type="text" autocomplete="username email">
+ <input name="display-name" type="text" autocomplete="name">
+ <input name="password" type="password" autocomplete="new-password">
+ <input type="submit" value="Sign Up!">
+</form>
+```
+
+Before moving forward, check if your form includes autocomplete attributes. This helps the Credential Management API find the id and password from the form and construct a credential object.
+
+This also helps browsers not supporting the Credential Management API to understand its semantics. Learn more about autofill in this article by Jason Grigsby.

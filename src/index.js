@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import App from './App';
 
 
 const Checkbox = () => {
-  const [checked, setChecked] = useState(false);
-  
-  function toggle() {
-    setChecked(checked => !checked)
-  }
+  // useReducer(logic for second argment toggle function, inital state)
+  const [checked, toggle] = useReducer(checked => !checked, false);
   
   return (
     <>
@@ -22,6 +20,6 @@ const Checkbox = () => {
 }
 
 ReactDOM.render(
-  <Checkbox />, 
+  <App />, 
   document.getElementById("root")
 );
