@@ -16,7 +16,12 @@ export const LoginPlain = () => {
 
     try {
       await login({ username, password });
+      
       setIsLoggedIn(true);
+      // once logged in, clear userName and password
+      setUsername('');
+      setPassword('');
+      setError('');
     } catch (err) {
       console.log(err);
       setError('Incorrect username of password!');
@@ -28,8 +33,12 @@ export const LoginPlain = () => {
   return (
     <div className="App">
       <div className="login-container">
-        {isLoggedIn ? (<><h1>Hello {username}! 🍔🍟</h1></>) : 
-          (
+        {isLoggedIn ? (
+          <>
+            <h1>Hello {username}! 🍔🍟</h1>
+            <button onClick={() => setIsLoggedIn(false)}>Log Out</button>
+          </>
+        ) : (
           <form className="form" onSubmit={onSubmit}>
             {error && <p className="error">{error}</p>}
             <p>Please Login!</p>
