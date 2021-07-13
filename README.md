@@ -725,7 +725,7 @@ ReactDOM.render(
 ## Reducer
 - mini goal: Checked or not checked text showing up
 
-"I want" : "no I don't"
+- text to show up: "I want" : "No, I don't"
 
 
 ```jsx
